@@ -19,12 +19,27 @@ func main() {
 		var userTickets uint
 
 		fmt.Println("Enter your first name: ")
-		fmt.Scan(&userName)
+		scan, err := fmt.Scan(&userName)
+		if err != nil {
+			if scan == 0 {
+				fmt.Println("Error reading input.")
+				return
+			}
+			return
+		} else if len(userName) < 2 || !IsAlpha(userName) {
+			fmt.Println("Invalid name. Please enter a valid name.")
+			continue
+		}
 
 		fmt.Println("Enter number of tickets: ")
-		fmt.Scan(&userTickets)
-
-		if userTickets > remainingTickers {
+		scan, err = fmt.Scan(&userTickets)
+		if err != nil {
+			if scan == 0 {
+				fmt.Println("Error reading input.")
+				return
+			}
+			return
+		} else if userTickets == 0 || userTickets > remainingTickers {
 			fmt.Printf("There are only %v tickets available, so you can't book %v tickets.\n", remainingTickers, userTickets)
 			continue
 		}
