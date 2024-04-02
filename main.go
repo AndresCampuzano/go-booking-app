@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/AndresCampuzano/go-booking-app/helper"
+)
 
 func main() {
 	conferenceName := "Go Conference"
@@ -22,7 +25,7 @@ func main() {
 				return
 			}
 			return
-		} else if len(userName) < 2 || !IsAlpha(userName) {
+		} else if !helper.ValidateUserInput(userName) {
 			fmt.Println("Invalid name. Please enter a valid name.")
 			continue
 		}
@@ -35,7 +38,7 @@ func main() {
 				return
 			}
 			return
-		} else if userTickets == 0 || userTickets > remainingTickers {
+		} else if !helper.ValidateTicketsInput(userTickets, remainingTickers) {
 			fmt.Printf("There are only %v tickets available, so you can't book %v tickets.\n", remainingTickers, userTickets)
 			continue
 		}
